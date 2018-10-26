@@ -13,6 +13,13 @@ namespace NHCCServiceTracker
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // /Cuisine/french  - parameter, not an action, but want it passed in.  So define a new route
+            // order of routes is significant  -- first one found wins
+
+            routes.MapRoute("Cuisine",
+                "cuisine/{name}",
+                new {controller = "Cuisine", action = "Search", name = UrlParameter.Optional });  // default route for the maproute
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
